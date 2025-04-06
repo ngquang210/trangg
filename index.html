@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chọn 1 hoặc 2</title>
+    <style>
+        /* --- CSS Start --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f8f9fa; /* Màu nền sáng hơn chút */
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-width: 320px; /* Đảm bảo đủ rộng */
+        }
+
+        #prompt-message {
+            font-size: 1.6em; /* To hơn */
+            color: #495057; /* Màu xám đậm */
+            margin-bottom: 30px; /* Tăng khoảng cách */
+        }
+
+        #button-container button {
+            padding: 15px 35px; /* Nút to hơn */
+            margin: 10px 15px; /* Khoảng cách giữa các nút */
+            font-size: 1.3em; /* Chữ trong nút to hơn */
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px; /* Bo tròn hơn */
+            color: white;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            min-width: 80px; /* Chiều rộng tối thiểu cho nút */
+        }
+
+        #button-container button:active {
+            transform: scale(0.97); /* Hiệu ứng nhấn rõ hơn */
+        }
+
+        /* Màu sắc cho từng nút */
+        #btn-1 {
+            background-color: #007bff; /* Xanh dương */
+        }
+        #btn-1:hover {
+            background-color: #0056b3;
+        }
+
+        #btn-2 {
+             background-color: #6f42c1; /* Tím */
+        }
+        #btn-2:hover {
+            background-color: #5a32a3;
+        }
+
+        #result-message {
+            margin-top: 30px;
+            font-size: 1.4em; /* Kích thước chữ kết quả */
+            font-weight: bold;
+            color: #343a40; /* Màu chữ kết quả */
+            min-height: 60px; /* Đảm bảo đủ chỗ cho text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px; /* Padding cho text dài */
+            line-height: 1.4; /* Giãn dòng nếu text dài */
+        }
+
+        .hidden {
+            display: none; /* Ẩn phần tử */
+        }
+        /* --- CSS End --- */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Nội dung HTML -->
+        <p id="prompt-message">Chọn "1" hoặc "2" đi nè 👇</p>
+
+        <div id="button-container">
+            <button id="btn-1">1</button>
+            <button id="btn-2">2</button>
+        </div>
+
+        <p id="result-message" class="hidden"></p>
+    </div>
+
+    <script>
+        // --- JavaScript Start ---
+        // Lấy các phần tử HTML
+        const promptMessage = document.getElementById('prompt-message');
+        const buttonContainer = document.getElementById('button-container');
+        const btn1 = document.getElementById('btn-1');
+        const btn2 = document.getElementById('btn-2');
+        const resultMessage = document.getElementById('result-message');
+
+        // Định nghĩa các thông điệp
+        const message1 = "oi troi sao trang lai xinh voi de thuong nhu nay 🥰 muon xem cai 2 la gi khog the doi 5s nhaaa 😉";
+        const message2 = "eo oi tien giang tran aaa cte theee 😍";
+
+        // Hàm để hiển thị trạng thái ban đầu (câu hỏi và nút)
+        function showInitialState() {
+            promptMessage.classList.remove('hidden');
+            buttonContainer.classList.remove('hidden');
+            resultMessage.classList.add('hidden');
+            resultMessage.textContent = ''; // Xóa nội dung tin nhắn cũ
+        }
+
+        // Hàm để hiển thị tin nhắn kết quả (ẩn câu hỏi và nút)
+        function showResultMessage(message) {
+            resultMessage.textContent = message;
+            promptMessage.classList.add('hidden');
+            buttonContainer.classList.add('hidden');
+            resultMessage.classList.remove('hidden');
+        }
+
+        // Thêm sự kiện click cho nút "1"
+        btn1.addEventListener('click', function() {
+            // 1. Hiển thị thông báo của nút 1
+            showResultMessage(message1);
+
+            // 2. Đặt hẹn giờ để quay lại trạng thái ban đầu sau 5 giây
+            setTimeout(function() {
+                // 3. Sau 5 giây, gọi hàm để hiển thị lại câu hỏi và nút
+                showInitialState();
+            }, 5000); // 5000 mili giây = 5 giây
+        });
+
+        // Thêm sự kiện click cho nút "2"
+        btn2.addEventListener('click', function() {
+            // Hiển thị thông báo của nút 2 (và giữ nguyên)
+            showResultMessage(message2);
+        });
+        // --- JavaScript End ---
+    </script>
+</body>
+</html>
